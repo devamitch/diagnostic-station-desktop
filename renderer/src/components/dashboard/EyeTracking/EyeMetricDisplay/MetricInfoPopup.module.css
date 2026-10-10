@@ -1,0 +1,100 @@
+.container {
+
+	border-radius: 20px;
+}
+
+.header {
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.title {
+	font-size: 1.65rem;
+	font-weight: 600;
+	color: var(--metricValue);
+	margin-bottom: 0.5rem;
+}
+
+.description {
+	font-size: 1.15rem;
+	color: var(--lightText);
+	line-height: 1.4;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.section {
+
+	background: var(--cardBackground);
+	border-radius: 12px;
+	padding: 1rem;
+}
+
+.sectionTitle {
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--metricValue);
+	margin-bottom: 0.5rem;
+}
+
+.sectionText {
+	font-size: 0.9rem;
+	color: var(--lightMetricValue);
+	line-height: 1.4;
+	margin: 0;
+}
+
+.quickWin {
+	font-size: 0.9rem;
+	color: var(--lightMetricValue);
+	line-height: 1.4;
+	margin: 0;
+	font-weight: 500;
+}
+
+@media (max-width: 768px) {
+	.container {
+		margin: 1rem;
+		padding: 1.25rem;
+		max-width: none;
+	}
+	
+	.title {
+		font-size: 1.25rem;
+	}
+	
+	.description {
+		font-size: 0.85rem;
+	}
+	
+	.section {
+		padding: 0.75rem;
+	}
+	
+	.sectionTitle {
+		font-size: 0.85rem;
+	}
+	
+	.sectionText,
+	.quickWin {
+		font-size: 0.8rem;
+	}
+}
+
+.exercisesGrid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.75rem;
+	margin-top: 0.75rem;
+}
+
+@media (max-width: 768px) {
+	.exercisesGrid {
+		grid-template-columns: 1fr;
+		gap: 0.5rem;
+	}
+}

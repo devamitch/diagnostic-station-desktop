@@ -1,0 +1,91 @@
+.container {
+	text-align: center;
+	padding: 25px;
+    background-color: var(--cardBackground);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: var(--metricValue);
+}
+
+.description {
+	font-size: 1rem;
+	color: var(--metricValue);
+}
+
+.buttonContainer {
+	display: flex;
+	flex-direction: row;
+	gap: 0.75rem;
+    width: 100%;
+}
+
+.cancelButton {
+    flex: 1;
+	padding: 14px 24px;
+	border-radius:12px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	background: var(--lightMetricValue);
+	color: var(--cardBackground);
+	transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover {
+	background: var(--metricValue);
+}
+
+
+.deleteButton {
+	flex: 1;
+	padding: 14px 24px;
+	border-radius: 12px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+    border: 2px solid var(--highValue);
+	color: var(--metricValue);
+	transition: background-color 0.2s ease;
+}
+
+.deleteButton:hover {
+ border-color: var(--lightText);
+}
+
+@media (max-width: 768px) {
+	.container {
+		padding: 0.75rem;
+	}
+    .buttonContainer {
+        flex-direction: column;
+    }
+    .cancelButton,
+    .deleteButton {
+        width: 100%;
+        font-size: 13px;
+    }
+	
+	.title {
+		font-size: 1.25rem;
+	}
+    .description {
+        font-size: 0.75rem;
+    }
+}

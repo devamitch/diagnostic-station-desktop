@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.mainSection {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.scrollContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none; 
+}
+
+.cardWrapper {
+  flex: 0 0 auto;
+}
+
+@media (min-width: 780px) {
+  .cardWrapper {
+    width: calc((100% - 3rem) / 4); 
+  }
+}
+
+@media (min-width: 480px) and (max-width: 779px) {
+  .cardWrapper {
+    width: calc((100% - 2rem) / 3); 
+  }
+}
+
+@media (max-width: 479px) {
+  .cardWrapper {
+    width: calc((100% - 1rem) / 2); 
+  }
+}
+
+

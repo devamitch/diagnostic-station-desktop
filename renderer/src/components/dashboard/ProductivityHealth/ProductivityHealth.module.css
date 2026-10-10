@@ -1,0 +1,124 @@
+
+.card {
+	display:flex;
+	flex-grow:1;
+	width: 100%;
+	border-radius: 20px;
+	background: var(--cardBackground);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 1.25rem;
+	padding-top: 1.5rem;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.titleSection {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--metricValue);
+}
+
+.subtitle {
+	font-size: 13px;
+	color: var(--lightMetricValue);
+	margin: 4px 0 0;
+}
+
+.date {
+	font-size: 0.6rem;
+	color: var(--lightMetricValue);
+	align-self: center;
+}
+
+.conditionSection {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	color: var(--lightMetricValue);
+	font-size: 0.8rem;
+	margin-top: 1rem;
+}
+
+.visualizationWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.visualization {
+  width: 100%;
+}
+
+.emotionBubble {
+  fill: var(--subtleCardBackground);
+  stroke: var(--highlight-color);
+  stroke-width: 4;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.emotionBubble.highlighted {
+  fill: var(--cardBackground);
+}
+
+.connectionLine {
+  stroke: var(--line-color);
+  stroke-width: 12;
+  animation: drawLine 0.6s ease-out;
+}
+
+@keyframes drawLine {
+  from {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+  }
+  to {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 0;
+  }
+}
+
+
+.emotionLabel {
+  font-size: 12px;
+  font-weight: 500;
+  text-anchor: middle;
+  fill: var(--lightText);
+}
+
+.centerCircle {
+  fill: var(--cardBackground);
+  stroke: var(--center-color);
+  stroke-width: 5;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.centerText {
+  font-size: 28px;
+  font-weight: 600;
+  text-anchor: middle;
+    fill: var(--metricValue);
+}
+
+.centerSubtext {
+  font-size: 12px;
+  font-weight: 400;
+  text-anchor: middle;
+  fill: var(--metricValue);
+}
+

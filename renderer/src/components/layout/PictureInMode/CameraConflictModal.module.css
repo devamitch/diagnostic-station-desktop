@@ -1,0 +1,375 @@
+.conflictContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2rem;
+	max-width: 650px;
+	margin: 0 auto;
+	background: var(--cardBackground);
+	border-radius: 20px;
+	position: relative;
+}
+
+.closeIconButton {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: var(--subtleCardBackground);
+	border: none;
+	border-radius: 50%;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: var(--lightText);
+	transition: all 0.3s ease;
+	z-index: 10;
+}
+
+.closeIconButton:hover {
+	background: var(--lightMetricValue);
+	color: white;
+	transform: rotate(90deg);
+}
+
+.iconSection {
+	margin-bottom: 1.5rem;
+}
+
+.warningIcon {
+	color: var(--highValue);
+	animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.6;
+	}
+}
+
+.contentSection {
+	width: 100%;
+}
+
+.title {
+	font-size: 22px;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	text-align: center;
+	color: var(--metricValue);
+}
+
+.description {
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.6;
+	color: var(--lightText);
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.solutionBox {
+	background: linear-gradient(135deg, var(--lowValue) 0%, var(--lightMetricValue) 100%);
+	border-radius: 20px;
+	padding: 1.25rem;
+	margin-bottom: 1.5rem;
+	color: white;
+}
+
+.solutionTitle {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+	color: white;
+}
+
+.solutionText {
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.5;
+	opacity: 0.95;
+	color: white;
+	margin: 0;
+}
+
+.stepsSection {
+	background: var(--subtleCardBackground);
+	border-radius: 20px;
+	padding: 1.25rem;
+	margin-bottom: 1.5rem;
+}
+
+.stepsSection h3 {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 0.75rem;
+	color: var(--metricValue);
+}
+
+.stepsList {
+	margin-left: 1.25rem;
+	line-height: 1.6;
+	color: var(--lightText);
+	list-style: decimal;
+}
+
+.stepsList li {
+	margin-bottom: 0.75rem;
+	font-size: 15px;
+	font-weight: 400;
+	padding-left: 0.5rem;
+}
+
+.stepsList li:last-child {
+	margin-bottom: 0;
+}
+
+.stepsList strong {
+	color: var(--lowValue);
+	font-weight: 600;
+}
+
+.noteBox {
+	background: var(--cardBackground);
+	border-left: 4px solid var(--modValue);
+	padding: 1rem;
+	margin-top: 1rem;
+	border-radius: 20px;
+}
+
+.noteBox p {
+	margin: 0;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.5;
+	color: var(--metricValue);
+}
+
+.noteBox strong {
+	font-weight: 600;
+	color: var(--metricValue);
+}
+
+/* Info Section */
+.infoSection {
+	background: var(--cardBackground);
+	border: 2px solid var(--subtleCardBackground);
+	border-radius: 20px;
+	padding: 1.25rem;
+	margin-bottom: 1.5rem;
+}
+
+.infoSection h3 {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	color: var(--metricValue);
+}
+
+.benefitsList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.benefitsList li {
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.6;
+	color: var(--lightText);
+	margin-bottom: 0.75rem;
+	padding-left: 1.75rem;
+	position: relative;
+}
+
+.benefitsList li:last-child {
+	margin-bottom: 0;
+}
+
+.benefitsList li::before {
+	content: '✓';
+	position: absolute;
+	left: 0;
+	color: var(--lowValue);
+	font-weight: bold;
+	font-size: 1.25rem;
+	top: -2px;
+}
+
+.benefitsList strong {
+	color: var(--lowValue);
+	font-weight: 600;
+}
+
+/* Troubleshooting Section */
+.troubleshootSection {
+	background: var(--subtleCardBackground);
+	border-radius: 20px;
+	padding: 1.25rem;
+	margin-bottom: 1.5rem;
+}
+
+.troubleshootSection h3 {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	color: var(--metricValue);
+}
+
+.troubleItem {
+	margin-bottom: 1rem;
+}
+
+.troubleItem:last-child {
+	margin-bottom: 0;
+}
+
+.troubleItem strong {
+	display: block;
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--metricValue);
+	margin-bottom: 0.25rem;
+}
+
+.troubleItem p {
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: var(--lightText);
+	margin: 0;
+}
+
+.actions {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+}
+
+.primaryButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.875rem 1.5rem;
+	background: var(--lowValue);
+	color: white;
+	border: none;
+	border-radius: 20px;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.primaryButton:hover:not(:disabled) {
+	transform: translateY(-2px);
+	opacity: 0.9;
+}
+
+.primaryButton:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.secondaryButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.875rem 1.5rem;
+	background: var(--cardBackground);
+	color: var(--lowValue);
+	border: 2px solid var(--lowValue);
+	border-radius: 20px;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.secondaryButton:hover {
+	background: var(--lowValue);
+	color: white;
+	transform: translateY(-2px);
+}
+
+.closeButton {
+	padding: 0.875rem 1.5rem;
+	background: var(--subtleCardBackground);
+	color: var(--lightText);
+	border: none;
+	border-radius: 20px;
+	font-size: 15px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+	background: var(--lightMetricValue);
+	color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+	.conflictContainer {
+		padding: 1.5rem;
+		max-width: 100%;
+	}
+
+	.title {
+		font-size: 18px;
+	}
+
+	.description {
+		font-size: 13px;
+	}
+
+	.solutionTitle,
+	.stepsSection h3,
+	.infoSection h3,
+	.troubleshootSection h3 {
+		font-size: 16px;
+	}
+
+	.solutionText,
+	.stepsList li,
+	.benefitsList li {
+		font-size: 13px;
+	}
+
+	.actions {
+		gap: 0.5rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.conflictContainer {
+		padding: 1rem;
+	}
+
+	.title {
+		font-size: 16px;
+	}
+
+	.stepsSection,
+	.infoSection,
+	.troubleshootSection {
+		padding: 1rem;
+	}
+
+	.closeIconButton {
+		width: 28px;
+		height: 28px;
+		top: 0.75rem;
+		right: 0.75rem;
+	}
+}

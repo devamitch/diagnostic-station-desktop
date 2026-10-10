@@ -1,0 +1,404 @@
+/* Compact Premium Update Indicator */
+.updateIndicator {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background: rgba(255, 255, 255, 0.98);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border-radius: 16px;
+	box-shadow:
+		0 4px 20px rgba(72, 89, 83, 0.1),
+		0 0 0 1px rgba(107, 162, 146, 0.08);
+	padding: 12px 16px;
+	max-width: 320px;
+	z-index: 9999;
+	animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInUp {
+	from {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.updateContent {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.updateIconWrapper {
+	flex-shrink: 0;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, var(--lowValue), var(--lightMetricValue));
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(107, 162, 146, 0.15);
+}
+
+.updateIcon {
+	width: 18px;
+	height: 18px;
+	color: white;
+}
+
+.updateIcon.download {
+	animation: bounce 2s ease-in-out infinite;
+}
+
+.updateIcon.success {
+	animation: successPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-3px);
+	}
+}
+
+@keyframes successPop {
+	0% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1.15);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.updateSpinner {
+	width: 18px;
+	height: 18px;
+	position: relative;
+}
+
+.spinnerRing {
+	width: 100%;
+	height: 100%;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-top-color: white;
+	border-radius: 50%;
+	animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.updateInfo {
+	flex: 1;
+	min-width: 0;
+}
+
+.updateTitle {
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--metricValue);
+	margin-bottom: 4px;
+	line-height: 1.3;
+	letter-spacing: -0.01em;
+}
+
+.updateProgressWrapper {
+	margin: 6px 0 4px;
+}
+
+.updateProgressBar {
+	width: 100%;
+	height: 4px;
+	background: rgba(107, 162, 146, 0.12);
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.updateProgressFill {
+	height: 100%;
+	background: linear-gradient(90deg, var(--lowValue), var(--modValue));
+	border-radius: 2px;
+	transition: width 0.3s ease;
+	box-shadow: 0 0 6px rgba(107, 162, 146, 0.3);
+}
+
+.updateProgressDetails {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 10px;
+	color: var(--lightText);
+	gap: 8px;
+	margin-top: 4px;
+}
+
+.progressPercent {
+	font-weight: 700;
+	font-size: 11px;
+	color: var(--metricValue);
+}
+
+.progressSize,
+.progressSpeed {
+	font-size: 9px;
+	opacity: 0.75;
+}
+
+.readyMessage {
+	font-size: 11px;
+	color: var(--lightMetricValue);
+	margin-top: 2px;
+}
+
+.versionBadge {
+	display: inline-block;
+	font-size: 10px;
+	font-weight: 600;
+	color: var(--lowValue);
+	background: rgba(107, 162, 146, 0.08);
+	padding: 2px 8px;
+	border-radius: 4px;
+	margin-top: 3px;
+}
+
+.updateActions {
+	flex-shrink: 0;
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+.updateBtn {
+	padding: 6px 12px;
+	border-radius: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	border: none;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	letter-spacing: -0.01em;
+}
+
+.updateBtn.install {
+	background: linear-gradient(135deg, var(--lowValue), var(--lightMetricValue));
+	color: white;
+	box-shadow: 0 2px 8px rgba(107, 162, 146, 0.2);
+}
+
+.updateBtn.install:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(107, 162, 146, 0.3);
+}
+
+.updateBtn.install:active {
+	transform: translateY(0);
+}
+
+.updateBtn.dismiss {
+	background: rgba(146, 162, 156, 0.08);
+	color: var(--lightText);
+	padding: 6px 10px;
+	font-size: 14px;
+	line-height: 1;
+}
+
+.updateBtn.dismiss:hover {
+	background: rgba(146, 162, 156, 0.15);
+	color: var(--metricValue);
+}
+
+/* Status-specific styles */
+.updateIndicator.checking {
+	border-left: 3px solid var(--lowValue);
+}
+
+.updateIndicator.available {
+	border-left: 3px solid var(--modValue);
+}
+
+.updateIndicator.downloading {
+	border-left: 3px solid var(--modValue);
+	animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1), pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		box-shadow:
+			0 4px 20px rgba(72, 89, 83, 0.1),
+			0 0 0 1px rgba(107, 162, 146, 0.08);
+	}
+	50% {
+		box-shadow:
+			0 4px 20px rgba(214, 168, 91, 0.2),
+			0 0 0 1px rgba(214, 168, 91, 0.15);
+	}
+}
+
+.updateIndicator.downloaded {
+	border-left: 3px solid var(--lowValue);
+	animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1), successGlow 1.2s ease-in-out;
+}
+
+@keyframes successGlow {
+	0%,
+	100% {
+		box-shadow:
+			0 4px 20px rgba(72, 89, 83, 0.1),
+			0 0 0 1px rgba(107, 162, 146, 0.08);
+	}
+	50% {
+		box-shadow:
+			0 4px 20px rgba(107, 162, 146, 0.25),
+			0 0 0 1px rgba(107, 162, 146, 0.2);
+	}
+}
+
+.updateIndicator.error {
+	border-left: 3px solid var(--highValue);
+}
+
+.updateIndicator.notavailable {
+	border-left: 3px solid var(--lightMetricValue);
+}
+
+/* Confetti effect - subtle */
+.confetti {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 10000;
+	background: radial-gradient(
+		circle at 85% 85%,
+		rgba(107, 162, 146, 0.06) 0%,
+		transparent 60%
+	);
+	animation: confettiFade 2.5s ease-out forwards;
+}
+
+@keyframes confettiFade {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+/* Compact floating check button */
+.updateCheckButton {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, var(--lowValue), var(--lightMetricValue));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	z-index: 9998;
+}
+
+.updateCheckButton:hover {
+	transform: scale(1.08) rotate(90deg);
+	box-shadow:
+		0 4px 16px rgba(107, 162, 146, 0.3),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.updateCheckButton:active {
+	transform: scale(1.02) rotate(90deg);
+}
+
+.updateCheckButton:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: scale(1);
+}
+
+.updateCheckIcon {
+	width: 22px;
+	height: 22px;
+	color: white;
+	transition: transform 0.25s ease;
+}
+
+.updateCheckButton:disabled .updateCheckIcon {
+	animation: spin 1s linear infinite;
+}
+
+/* Responsive - even more compact on mobile */
+@media (max-width: 640px) {
+	.updateIndicator {
+		bottom: 12px;
+		right: 12px;
+		left: 12px;
+		max-width: unset;
+		padding: 10px 12px;
+	}
+
+	.updateContent {
+		gap: 8px;
+	}
+
+	.updateIconWrapper {
+		width: 28px;
+		height: 28px;
+	}
+
+	.updateIcon {
+		width: 16px;
+		height: 16px;
+	}
+
+	.updateTitle {
+		font-size: 12px;
+	}
+
+	.updateBtn {
+		padding: 5px 10px;
+		font-size: 11px;
+	}
+
+	.updateCheckButton {
+		bottom: 12px;
+		right: 12px;
+		width: 40px;
+		height: 40px;
+	}
+
+	.updateCheckIcon {
+		width: 20px;
+		height: 20px;
+	}
+
+	.progressPercent {
+		font-size: 10px;
+	}
+
+	.progressSize,
+	.progressSpeed {
+		font-size: 8px;
+	}
+}

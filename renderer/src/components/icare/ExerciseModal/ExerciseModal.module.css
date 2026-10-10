@@ -1,0 +1,505 @@
+.videoContainer {
+  position: relative;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: var(--border-radii);
+  overflow: hidden;
+  margin: 0 auto 16px auto;
+  background: #000;
+  cursor: pointer;
+}
+
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Play Overlay */
+.playOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+
+.playOverlay:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.playButton {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.playButton:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
+}
+
+.playButton svg {
+  color: var(--metricValue);
+  margin-left: 4px;
+}
+
+.controlsOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.controlsOverlay.showControls {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.controlsBar {
+  position: relative;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: height 0.2s ease;
+}
+
+.progressBar:hover {
+  height: 8px;
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--lowValue);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.progressBar::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.progressBar::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--lowValue);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.progressBar::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.timeDisplay {
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+  color: white;
+  font-weight: 500;
+  padding-left: 2px;
+}
+
+.controlButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftControls,
+.rightControls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.controlButton {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.controlButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.controlButton:active {
+  transform: scale(0.95);
+}
+
+.volumeControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volumeSlider {
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  outline: none;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.volumeSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.volumeSlider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.volumeSlider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.exerciseButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.metricsContainer {
+  padding: 14px;
+}
+
+.comparisonTitle {
+  color: var(--metricValue);
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.comparisonSection {
+  margin-top: 16px;
+}
+
+.comparisonGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metricsSection {
+  padding: 10px;
+  background: var(--subtleCardBackground);
+  border-radius: var(--border-radii);
+}
+
+.metricsTitle {
+  color: var(--metricValue);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.metricsGrid {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.metricItem {
+  background: var(--cardBackground);
+  padding: 16px;
+  border-radius: var(--border-radii);
+  flex: 1;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.metricLabel {
+  display: block;
+  color: var(--lightText);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.metricValue {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.improvementSection {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--subtleCardBackground);
+  border-radius: var(--border-radii);
+}
+
+.improvementTitle {
+  color: var(--metricValue);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.improvementGrid {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.improvementItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 24px;
+  background: var(--cardBackground);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.improvementItem span:first-child {
+  color: var(--lightText);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.improvementItem span:last-child {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.positive {
+  color: var(--lowValue);
+}
+
+.negative {
+  color: var(--highValue);
+}
+
+.low {
+  color: var(--lowValue);
+}
+
+.moderate {
+  color: var(--modValue);
+}
+
+.high {
+  color: var(--highValue);
+}
+
+.veryHigh {
+  color: var(--vHighValue);
+}
+
+.normal {
+  color: var(--metricValue);
+}
+
+.good {
+  color: var(--lowValue);
+}
+
+.poor {
+  color: var(--highValue);
+}
+
+@media (max-width: 768px) {
+  .videoContainer {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+
+  .controlsBar {
+    padding: 12px;
+  }
+
+  .volumeControl {
+    display: none;
+  }
+
+  .metricsGrid {
+    flex-direction: column;
+  }
+
+  .metricItem {
+    padding: 12px;
+    min-width: unset;
+  }
+
+  .metricLabel {
+    font-size: 10px;
+  }
+
+  .metricValue {
+    font-size: 18px;
+  }
+
+  .improvementGrid {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .playButton {
+    width: 64px;
+    height: 64px;
+  }
+
+  .playButton svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .controlsBar {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .controlButton {
+    padding: 6px;
+  }
+
+  .controlButton svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .timeDisplay {
+    font-size: 10px;
+  }
+
+  .metricItem {
+    padding: 8px;
+  }
+
+  .metricLabel {
+    font-size: 9px;
+  }
+
+  .metricValue {
+    font-size: 14px;
+  }
+
+  .comparisonTitle,
+  .improvementTitle {
+    font-size: 16px;
+  }
+
+  .metricsTitle {
+    font-size: 14px;
+  }
+
+  .improvementItem {
+    padding: 8px 16px;
+  }
+
+  .improvementItem span:first-child {
+    font-size: 10px;
+  }
+
+  .improvementItem span:last-child {
+    font-size: 16px;
+  }
+
+  .playButton {
+    width: 56px;
+    height: 56px;
+  }
+
+  .playButton svg {
+    width: 28px;
+    height: 28px;
+  }
+}

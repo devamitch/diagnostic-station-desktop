@@ -1,0 +1,482 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	padding: 20px;
+}
+
+.section {
+	width: 100%;
+	height: auto;
+	background: var(--cardBackground);
+	border-radius: 20px;
+	padding: 1.25rem;
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	padding: 10px;
+	width: 100%;
+	cursor: pointer;
+	color: var(--metricValue);
+}
+
+.accordionContent {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	padding-left: 1rem;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	animation: slideDown 0.3s ease-out;
+}
+
+.optionButton {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 12px;
+	background: var(--subtleCardBackground);
+	border-radius: 20px;
+	cursor: pointer;
+	color: var(--metricValue);
+	transition: all 0.2s ease;
+	font-size: 12px;
+}
+
+.optionButton:hover {
+	background: var(--lightMetricValue);
+	color: var(--cardBackground);
+}
+
+.selectedOption {
+	background: var(--lightMetricValue);
+	color: var(--cardBackground);
+}
+
+.Logoutbutton {
+	width: 100%;
+	height: auto;
+	background: var(--cardBackground);
+	border-radius: 20px;
+	padding: 1.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.5rem;
+	color: var(--vHighValue);
+	cursor: pointer;
+}
+
+
+.updateSection {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+	padding: 0px 10px;
+	justify-content: space-between;
+}
+
+.updateSection::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+}
+
+
+.sparkleIcon {
+	color: var(--cardBackground);
+}
+
+
+.updateStatus {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.statusIcon {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--lightMetricValue);
+	border-radius: 50%;
+	color: var(--cardBackground);
+}
+
+.spinIcon {
+	animation: spin 1s linear infinite;
+}
+
+
+.pulseIcon {
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+.statusContent {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-self: center;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--lightText);
+}
+
+
+.statusVersion {
+	font-size: 12px;
+	font-weight: 700;
+	color: var(--lightMetricValue);
+	background: rgba(107, 162, 146, 0.1);
+	padding: 4px 10px;
+	border-radius: 8px;
+	display: inline-block;
+	align-self: flex-start;
+}
+
+/* Progress Bar */
+.progressContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.progressBar {
+	width: 100%;
+	height: 8px;
+	background: rgba(107, 162, 146, 0.15);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.progressFill {
+	height: 100%;
+	background:var(--metricValue);
+	border-radius: 4px;
+	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	animation: shimmerProgress 2s infinite;
+}
+
+
+
+.progressDetails {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 11px;
+	color: var(--lightText);
+}
+
+.progressPercent {
+	font-weight: 700;
+	font-size: 12px;
+	color: var(--metricValue);
+}
+
+.progressSize {
+	opacity: 0.8;
+}
+
+.updateButton {
+	margin-top: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+    padding: 0.65rem 1.6rem;
+	border-radius: 12px;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	position: relative;
+	z-index: 10;
+	width: fit-content;
+}
+
+.checkButton {
+	background: var(--lightMetricValue);
+	color: var(--cardBackground);
+	
+}
+
+.checkButton:hover {
+background: var(--metricValue);
+}
+
+.checkButton:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+.checkButton:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.installButton {
+	background: var(--lightMetricValue);
+	color: var(--cardBackground);
+	animation: breathe 2s ease-in-out infinite;
+}
+
+.installButton:hover {
+	transform: translateY(-2px) scale(1.02);
+	background: var(--metricValue);
+	
+}
+
+.autoUpdateInfo {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 13px;
+	color: var(--lightText);
+}
+
+.updateActions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 8px;
+}
+
+.infoIcon {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--lightMetricValue);
+	color: var(--cardBackground);
+	border-radius: 50%;
+	font-weight: 700;
+}
+
+
+.deleteAccountButton {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	padding: 14px 12px;
+	text-align: start;
+	width: 100%;
+	cursor: pointer;
+	border-radius: 12px;
+	border: none;
+	background:var(--subtleCardBackground);
+}
+
+
+.deleteAccountContent {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex: 1;
+}
+
+.deleteAccountIcon {
+	width: 40px;
+	height: 40px;
+	border-radius: 12px;
+	background: var(--highValue);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--cardBackground);
+}
+
+.deleteAccountText {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.deleteAccountTitle {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--highValue);
+}
+
+.deleteAccountSubtitle {
+	font-size: 13px;
+	color: var(--lightText);
+}
+
+.deleteWarning {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 12px 0px;
+}
+
+.deleteWarning svg {
+	color: var(--modValue);
+	margin-top: 2px;
+}
+
+.deleteWarning p {
+	font-size: 13px;
+	color: var(--lightText);
+	line-height: 1.5;
+}
+
+@media (max-width: 460px) {
+	.container {
+		gap: 1rem;
+		padding: 10px;
+	}
+
+	.button {
+		padding: 8px;
+		gap: 0.25rem;
+		font-size: 14px;
+	}
+
+	.section {
+		padding: 1rem;
+	}
+
+	.accordionContent {
+		padding-left: 0.5rem;
+	}
+
+	.optionButton {
+		padding: 0.6rem 0.8rem;
+		font-size: 0.85rem;
+	}
+
+	.deleteAccountButton {
+		padding: 12px 10px;
+	}
+
+	.deleteAccountIcon {
+		width: 36px;
+		height: 36px;
+	}
+
+	.deleteAccountTitle {
+		font-size: 14px;
+	}
+
+	.deleteAccountSubtitle {
+		font-size: 12px;
+	}
+
+	.deleteWarning {
+		padding: 10px;
+	}
+
+	.deleteWarning p {
+		font-size: 12px;
+	}
+
+	.Logoutbutton {
+		padding: 1rem;
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 360px) {
+	.button {
+		font-size: 12px;
+	}
+
+	.deleteAccountTitle {
+		font-size: 13px;
+	}
+
+	.deleteAccountSubtitle {
+		font-size: 11px;
+	}
+}
+/* Animations*/
+
+@keyframes breathe {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.02);
+	}
+}
+
+@keyframes glow {
+	0%,
+	100% {
+		box-shadow:
+			0 0 5px rgba(214, 168, 91, 0.2),
+			0 0 10px rgba(214, 168, 91, 0.1);
+	}
+	50% {
+		box-shadow:
+			0 0 10px rgba(214, 168, 91, 0.3),
+			0 0 20px rgba(214, 168, 91, 0.2);
+	}
+}
+
+@keyframes shimmerProgress {
+	0% {
+		background-position: -200% center;
+	}
+	100% {
+		background-position: 200% center;
+	}
+}
+
+@keyframes slideInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		max-height: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		max-height: 300px;
+		transform: translateY(0);
+	}
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.1);
+		opacity: 0.8;
+	}
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}

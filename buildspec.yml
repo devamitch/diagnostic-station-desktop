@@ -1,0 +1,241 @@
+version: 0.2
+
+# ✅ COMPLETE BUILDSPEC FOR OLO DESKTOP
+# Builds ONLY on main branch
+# Uses Ubuntu image: aws/codebuild/standard:7.0
+
+env:
+  shell: bash
+  variables:
+    # Node environment
+    NODE_ENV: production
+    
+    # Build targets (comma-separated: win, linux, mac, all)
+    NEXTRON_BUILD_TARGETS: win
+    
+    # Cache version (increment to bust cache)
+    CACHE_VERSION: v2
+    
+    # S3 bucket for releases and artifacts
+    RELEASE_BUCKET: olo-nextron
+    
+    # Certificate configuration
+    CERT_S3_BUCKET: olo-nextron
+    CERT_S3_KEY: certificate/oLo_dev.p12
+    CERT_LOCAL_PATH: /tmp/oLo_dev.p12
+    
+  # AWS Systems Manager Parameter Store
+  parameter-store:
+    GH_TOKEN: /olo/github/token
+    CSC_KEY_PASSWORD: /olo/certificates/csc-password
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+      
+    commands:
+      - echo "=========================================="
+      - echo "🚀 INSTALL PHASE"
+      - echo "=========================================="
+      - echo "Build Information:"
+      - echo "  Branch ${CODEBUILD_WEBHOOK_HEAD_REF:-refs/heads/main}"
+      - echo "  Commit ${CODEBUILD_RESOLVED_SOURCE_VERSION:-unknown}"
+      - echo "  Build ID ${CODEBUILD_BUILD_ID:-unknown}"
+      - echo "  Region ${AWS_REGION:-unknown}"
+      - echo ""
+      
+      # ✅ CRITICAL: Only build on main branch
+      - |
+        # Handle cases where CODEBUILD_WEBHOOK_HEAD_REF might not be set (manual builds, scheduled builds)
+        WEBHOOK_REF="${CODEBUILD_WEBHOOK_HEAD_REF:-refs/heads/main}"
+        BRANCH_NAME="${WEBHOOK_REF#refs/heads/}"
+        echo "Detected branch: ${BRANCH_NAME}"
+        
+        if [[ "${BRANCH_NAME}" != "main" ]]; then
+          echo ""
+          echo "⚠️  BUILD SKIPPED"
+          echo "This build is configured to run only on 'main' branch"
+          echo "Current branch: ${BRANCH_NAME}"
+          echo ""
+          exit 0
+        fi
+        
+        echo "✅ Building on main branch - proceeding..."
+        echo ""
+      
+      - echo ">>> Enabling Corepack for Yarn..."
+      - corepack enable
+      - corepack prepare yarn@stable --activate
+      
+      # Verify Yarn is available
+      - |
+        if ! yarn -v >/dev/null 2>&1; then
+          echo ">>> Installing Yarn globally as fallback..."
+          npm install -g yarn
+        fi
+        
+        echo ">>> Yarn version: $(yarn -v)"
+      
+      - echo ""
+      - echo ">>> Installing Node.js dependencies..."
+      - |
+        echo ">>> System memory status:"
+        if command -v free >/dev/null 2>&1; then
+          free -h || true
+        elif [ -f /proc/meminfo ]; then
+          grep -E '^MemTotal|^MemAvailable|^SwapTotal' /proc/meminfo || true
+        else
+          echo "Memory info not available"
+        fi
+        echo ""
+        
+        # Configure Yarn v4 for memory efficiency
+        # Disable Yarn's immutability enforcement to allow lockfile updates
+        # Yarn v4 migration requires lockfile format changes and peer dependency resolution
+        echo "enableImmutableInstalls: false" > .yarnrc.yml
+        
+        echo ">>> Yarn configuration:"
+        cat .yarnrc.yml
+        echo ""
+        
+        # Set very conservative Node.js memory limit (1GB) to prevent OOM kills
+        # CodeBuild standard instances have limited memory (3.6GB total)
+        export NODE_OPTIONS="--max-old-space-size=1024"
+        
+        echo ">>> Node.js memory limit set to 1GB (NODE_OPTIONS=${NODE_OPTIONS})"
+        echo ">>> Starting yarn install with memory optimizations..."
+        echo ""
+        
+        # Run yarn install with memory-efficient settings
+        # Yarn v4 will use the cache automatically if available
+        # Set low concurrency to reduce memory pressure
+        export YARN_ENABLE_IMMUTABLE_INSTALLS=false
+        
+        # Try install with retry logic for OOM resilience
+        yarn install || {
+          echo ">>> First install attempt failed, retrying..."
+          sleep 5
+          yarn install || {
+            echo ">>> Second install attempt failed, trying with reduced concurrency..."
+            # Clear any partial state
+            rm -rf node_modules/.cache 2>/dev/null || true
+            yarn install
+          }
+        } 
+      
+      - echo ""
+      - echo ">>> Making build scripts executable..."
+      - chmod +x .codebuild/*.sh
+      
+      - echo ""
+      - echo "✅ Install phase completed"
+      - echo ""
+
+  pre_build:
+    commands:
+      - echo "=========================================="
+      - echo "📦 PRE-BUILD PHASE"
+      - echo "=========================================="
+      
+      - echo ">>> Setting up Electron build cache..."
+      - export ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+      - export CSC_IDENTITY_AUTO_DISCOVERY=false
+      - mkdir -p "$ELECTRON_BUILDER_CACHE"
+      - echo ">>> Getting package version..."
+      - export PACKAGE_VERSION=$(node -p "require('./package.json').version")
+      - echo "Package version ${PACKAGE_VERSION}"
+      - echo ""
+      - echo ">>> Running pre-build setup script..."
+      - ./.codebuild/pre_build.sh
+      - echo ""
+      - echo "✅ Pre-build phase completed"
+      - echo ""
+
+  build:
+    commands:
+      - echo "=========================================="
+      - echo "🔨 BUILD PHASE"
+      - echo "=========================================="
+      
+      - echo ">>> Running lint checks..."
+      - ./.codebuild/run_lint.sh
+      
+      - echo ">>> Ensuring Wine environment variables are set..."
+      - |
+        if [[ "${NEXTRON_BUILD_TARGETS}" =~ (win|windows) ]]; then
+          export WINEDLLOVERRIDES="${WINEDLLOVERRIDES:-mscoree,mshtml=}"
+          export WINEPREFIX="${WINEPREFIX:-${HOME}/.wine}"
+          export DISPLAY="${DISPLAY:-:99}"
+          
+          if command -v wine64 &> /dev/null; then
+            export WINE="$(command -v wine64)"
+          elif command -v wine &> /dev/null; then
+            export WINE="$(command -v wine)"
+          else
+            echo "❌ ERROR: Wine not found!"
+            exit 1
+          fi
+          
+          echo "Wine environment configured:"
+          echo "  WINE=${WINE}"
+          echo "  WINEPREFIX=${WINEPREFIX}"
+          echo "  WINEDLLOVERRIDES=${WINEDLLOVERRIDES}"
+          echo ""
+        fi
+      
+      - echo ">>> Building targets ${NEXTRON_BUILD_TARGETS}"
+      - ./.codebuild/build_targets.sh
+      
+      - echo ""
+      - echo "✅ Build phase completed"
+      - echo ""
+
+  post_build:
+    commands:
+      - echo "=========================================="
+      - echo "📤 POST-BUILD PHASE"
+      - echo "=========================================="
+      
+      - echo ">>> Checking build artifacts..."
+      - |
+        if [[ -d dist ]]; then
+          echo "✅ dist/ directory found"
+          echo ""
+          echo "Build artifacts:"
+          find dist -type f \( -name "*.exe" -o -name "*.dmg" -o -name "*.deb" -o -name "*.yml" \) -exec ls -lh {} \;
+          echo ""
+        else
+          echo "❌ ERROR: dist/ directory not found"
+          echo "Build may have failed. Check build logs above."
+          exit 1
+        fi
+      
+      - echo ">>> Uploading artifacts to S3..."
+      - ./.codebuild/post_build.sh
+      - echo ""
+      - echo "=========================================="
+      - echo "✅ BUILD COMPLETED SUCCESSFULLY"
+      - echo "=========================================="
+      - echo "Version ${PACKAGE_VERSION}"
+      - echo "Build ID ${CODEBUILD_BUILD_ID}"
+      - echo ""
+      - echo "📦 Public releases:"
+      - echo "   s3://${RELEASE_BUCKET}/releases/${PACKAGE_VERSION}/"
+      - echo ""
+      - echo "🔒 Internal builds:"
+      - echo "   s3://${RELEASE_BUCKET}/builds/${CODEBUILD_BUILD_ID}/"
+      - echo ""
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist
+  discard-paths: no
+  name: olo-desktop-${PACKAGE_VERSION}-${CODEBUILD_BUILD_NUMBER}
+
+cache:
+  paths:
+    - node_modules/**/*
+    - renderer/node_modules/**/*
+    - $HOME/.cache/electron-builder/**/*

@@ -1,0 +1,373 @@
+.modalContainer {
+  max-width: 90vw;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.cameraContainer {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  border-radius: var(--border-radii);
+  overflow: hidden;
+  background: #000;
+}
+
+.metricsOverlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(1px);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.metricsRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.metricsRow > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.overlayLabel {
+  font-size: 12px;
+  color: var(--cardBackground);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.overlayValue {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 4px;
+  color: var(--cardBackground);
+}
+
+.scanControls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+.timerDisplay {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cardBackground);
+}
+
+.stopButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vHighValue);
+  color: var(--cardBackground);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stopButton:hover {
+  transform: translateY(-1px);
+}
+
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  gap: 16px;
+}
+
+.resultsHeader {
+  text-align: center;
+}
+
+.resultsTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--metricValue);
+}
+.resultSubtitle {
+  font-size: 16px;
+  color: var(--lightText);
+}
+
+.screenshotContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.faceScreenshot {
+  width: 80%;
+  border-radius: var(--border-radii);
+   transform: rotateY(180deg);
+}
+
+.scanResults {
+  margin-bottom: 24px;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.metricCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--cardBackground);
+  border-radius: var(--border-radii);
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--subtleCardBackground);
+  border-radius: 16px;
+  color: var(--metricValue);
+  flex-shrink: 0;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.metricLabel {
+  font-size: 14px;
+  color: var(--metricValue);
+  font-weight: 600;
+}
+
+.recommendedValue {
+  font-size: 12px;
+  color: var(--lightText);
+}
+
+.metricValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--metricValue);
+}
+
+.metricValue[data-status="low"],
+.metricValue[data-status="good"] {
+  color: var(--lowValue);
+}
+
+.metricValue[data-status="moderate"] {
+  color: var(--modValue);
+}
+
+.metricValue[data-status="high"],
+.metricValue[data-status="poor"],
+.metricValue[data-status="very-high"] {
+  color: var(--highValue);
+}
+
+.good {
+  color: var(--lowValue);
+}
+
+.moderate {
+  color: var(--modValue);
+}
+
+.poor,
+.high {
+  color: var(--highValue);
+}
+
+.low {
+  color: var(--lowValue);
+}
+
+.resultsFooter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.shareButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+  padding: 12px 32px;
+  background: var(--lightMetricValue);
+  color: var(--cardBackground);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shareButton:hover {
+  transform: translateY(-1px);
+  background: var(--metricValue);
+}
+
+.shareButton:disabled {
+  cursor: not-allowed;
+  background: var(--metricValue);
+}
+
+.shareSpinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--cardBackground);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .modalContainer {
+    max-width: 95vw;
+  }
+
+  .cameraContainer {
+    height: 60vh;
+    border-radius: 12px;
+  }
+
+  .metricsOverlay {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .metricsRow {
+    gap: 4px;
+  }
+
+  .overlayLabel {
+    font-size: 10px;
+  }
+
+  .overlayValue {
+    font-size: 12px;
+  }
+
+  .scanControls {
+    bottom: 12px;
+    gap: 12px;
+  }
+
+  .timerDisplay {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .stopButton {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .resultsTitle {
+    font-size: 22px;
+  }
+
+  .faceScreenshot {
+    width: 100%;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .metricCard {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 16px;
+  }
+
+  .cardIcon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .metricHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .metricLabel {
+    font-size: 13px;
+  }
+
+  .recommendedValue {
+    font-size: 11px;
+  }
+
+  .metricValue {
+    font-size: 18px;
+  }
+
+  .shareButton {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+}

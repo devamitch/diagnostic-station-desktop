@@ -1,0 +1,682 @@
+/* AccountDeletionDialog.module.css */
+
+.modalContainer {
+	width: 100%;
+	/* max-height: 90vh; */
+	/* overflow-y: auto; */
+	background: var(--cardBackground);
+	border-radius: var(--border-radii);
+}
+
+.stepContainer {
+	padding: 10px;
+}
+
+.iconContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 24px;
+}
+
+.warningIcon {
+	color: var(--highValue);
+}
+
+.stepIcon {
+	color: var(--metricValue);
+}
+
+.criticalIcon {
+	color: var(--vHighValue);
+	animation: shake 0.5s ease-in-out;
+}
+
+.successIcon {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 24px;
+}
+
+.successIcon svg {
+	color: var(--lowValue);
+	animation: scaleIn 0.5s ease-out;
+}
+
+
+@keyframes shake {
+	0%, 100% { transform: translateX(0); }
+	10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+	20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes scaleIn {
+	from {
+		transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/* Header */
+.stepHeader {
+	text-align: center;
+	margin-bottom: 32px;
+}
+
+.title {
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--metricValue);
+	margin: 16px 0 12px;
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+}
+
+.subtitle {
+	font-size: 16px;
+	color: var(--lightText);
+	line-height: 1.6;
+	text-align: center;
+	margin: 0;
+}
+
+/* Info Boxes */
+.infoBox {
+	background: linear-gradient(135deg, rgba(90, 154, 136, 0.05), rgba(90, 154, 136, 0.02));
+	border: 2px solid rgba(90, 154, 136, 0.2);
+	border-radius: var(--border-radii);
+	padding: 24px;
+	margin: 24px 0;
+}
+
+.infoItem {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.infoItem:last-child {
+	margin-bottom: 0;
+}
+
+.infoItem h4 {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--metricValue);
+	margin: 0 0 4px;
+}
+
+.infoItem p {
+	font-size: 14px;
+	color: var(--lightText);
+	margin: 0;
+	line-height: 1.5;
+}
+
+.infoIcon {
+	color: var(--lowValue);
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.warningIconSmall {
+	color: var(--highValue);
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.privacyNote {
+	background: var(--subtleCardBackground);
+	border-radius: var(--border-radii);
+	padding: 16px;
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+	margin: 24px 0;
+}
+
+.privacyNote svg {
+	color: var(--metricValue);
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.privacyNote p {
+	font-size: 14px;
+	color: var(--metricValue);
+	margin: 0;
+	line-height: 1.6;
+}
+
+/* Reasons Step */
+.reasonsContainer {
+	margin: 24px 0;
+}
+
+.reasonItem {
+	margin-bottom: 16px;
+}
+
+.reasonButton {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px;
+	background: var(--subtleCardBackground);
+	border-radius: var(--border-radii);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border: 2px solid transparent;
+}
+
+.reasonButton:hover {
+	background: rgba(148, 171, 150, 0.1);
+	border-color: var(--lightMetricValue);
+}
+
+.reasonSelected {
+	background: linear-gradient(135deg, rgba(90, 154, 136, 0.15), rgba(90, 154, 136, 0.05));
+	border-color: var(--lowValue);
+}
+
+.checkbox {
+	width: 24px;
+	height: 24px;
+	border: 2px solid var(--lightText);
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	flex-shrink: 0;
+}
+
+.reasonSelected .checkbox {
+	border-color: var(--lowValue);
+	background: var(--lowValue);
+	color: white;
+}
+
+.reasonButton span {
+	font-size: 15px;
+	color: var(--metricValue);
+	font-weight: 500;
+}
+
+.otherReasonInput {
+	width: 100%;
+	margin-top: 12px;
+	padding: 12px;
+	border: 2px solid var(--lightMetricValue);
+	border-radius: 12px;
+	font-size: 14px;
+	color: var(--metricValue);
+	background: var(--cardBackground);
+	resize: vertical;
+	font-family: inherit;
+}
+
+.otherReasonInput:focus {
+	outline: none;
+	border-color: var(--metricValue);
+}
+
+.feedbackNote {
+	background: var(--subtleCardBackground);
+	border-radius: var(--border-radii);
+	padding: 16px;
+	text-align: center;
+	margin: 24px 0;
+}
+
+.feedbackNote p {
+	font-size: 14px;
+	color: var(--lightText);
+	margin: 0;
+	font-style: italic;
+}
+
+/* Grace Period Step */
+.gracePeriodOptions {
+	margin: 24px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.gracePeriodCard {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 20px;
+	background: var(--subtleCardBackground);
+	border: 2px solid transparent;
+	border-radius: var(--border-radii);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-align: left;
+}
+
+.gracePeriodCard:hover {
+	background: rgba(148, 171, 150, 0.1);
+	border-color: var(--lightMetricValue);
+}
+
+.gracePeriodSelected {
+	background: linear-gradient(135deg, rgba(90, 154, 136, 0.15), rgba(90, 154, 136, 0.05));
+	border-color: var(--lowValue);
+}
+
+.gracePeriodRadio {
+	width: 24px;
+	height: 24px;
+	border: 2px solid var(--lightText);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	transition: all 0.3s ease;
+}
+
+.gracePeriodSelected .gracePeriodRadio {
+	border-color: var(--lowValue);
+}
+
+.gracePeriodRadioInner {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: var(--lowValue);
+}
+
+.gracePeriodContent h3 {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--metricValue);
+	margin: 0 0 4px;
+}
+
+.gracePeriodContent p {
+	font-size: 14px;
+	color: var(--lightText);
+	margin: 0;
+}
+
+.recoveryInfo {
+	background: linear-gradient(135deg, rgba(90, 154, 136, 0.05), rgba(90, 154, 136, 0.02));
+	border: 2px solid rgba(90, 154, 136, 0.2);
+	border-radius: var(--border-radii);
+	padding: 16px;
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+	margin: 24px 0;
+}
+
+.recoveryInfo svg {
+	color: var(--lowValue);
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.recoveryInfo h4 {
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--metricValue);
+	margin: 0 0 4px;
+}
+
+.recoveryInfo p {
+	font-size: 14px;
+	color: var(--lightText);
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* Final Confirm Step */
+.finalWarning {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 24px;
+}
+
+.summaryBox {
+	background: var(--subtleCardBackground);
+	border-radius: var(--border-radii);
+	padding: 24px;
+	margin: 24px 0;
+}
+
+.summaryBox h3 {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--metricValue);
+	margin: 0 0 20px;
+	padding-bottom: 12px;
+	border-bottom: 2px solid rgba(72, 89, 83, 0.1);
+}
+
+.summaryItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 16px;
+	gap: 16px;
+}
+
+.summaryItem:last-child {
+	margin-bottom: 0;
+}
+
+.summaryItem strong {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--metricValue);
+	flex-shrink: 0;
+}
+
+.summaryItem span {
+	font-size: 14px;
+	color: var(--lightText);
+	text-align: right;
+}
+
+.reasonsList {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	text-align: right;
+}
+
+.reasonsList span {
+	font-size: 13px;
+	color: var(--lightText);
+}
+
+.otherReasonText {
+	font-style: italic;
+	color: var(--metricValue);
+	margin-top: 4px;
+}
+
+.finalWarningBox {
+	background: linear-gradient(135deg, rgba(186, 81, 72, 0.08), rgba(186, 81, 72, 0.04));
+	border: 2px solid rgba(186, 81, 72, 0.3);
+	border-radius: var(--border-radii);
+	padding: 20px;
+	margin: 24px 0;
+}
+
+.finalWarningBox h4 {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--highValue);
+	margin: 0 0 12px;
+}
+
+.finalWarningBox ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.finalWarningBox li {
+	font-size: 14px;
+	color: var(--metricValue);
+	padding: 6px 0;
+	padding-left: 20px;
+	position: relative;
+}
+
+.finalWarningBox li::before {
+	content: '→';
+	position: absolute;
+	left: 0;
+	color: var(--highValue);
+	font-weight: bold;
+}
+
+/* Success Step */
+.successBox {
+	background: linear-gradient(135deg, rgba(90, 154, 136, 0.08), rgba(90, 154, 136, 0.04));
+	border: 2px solid rgba(90, 154, 136, 0.3);
+	border-radius: var(--border-radii);
+	padding: 20px;
+	margin: 24px 0;
+}
+
+.successBox h3 {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--lowValue);
+	margin: 0 0 12px;
+}
+
+.successBox ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.successBox li {
+	font-size: 14px;
+	color: var(--metricValue);
+	padding: 6px 0;
+	padding-left: 20px;
+	position: relative;
+}
+
+.successBox li::before {
+	content: '✓';
+	position: absolute;
+	left: 0;
+	color: var(--lowValue);
+	font-weight: bold;
+}
+
+.goodbyeMessage {
+	text-align: center;
+	margin: 24px 0;
+}
+
+.goodbyeMessage p {
+	font-size: 15px;
+	color: var(--metricValue);
+	line-height: 1.6;
+	margin: 12px 0;
+}
+
+.goodbyeNote {
+	font-weight: 600;
+	color: var(--lowValue);
+	font-size: 16px !important;
+}
+
+.redirectInfo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 12px;
+	background: var(--subtleCardBackground);
+	border-radius: 12px;
+	margin-top: 24px;
+}
+
+.redirectInfo svg {
+	color: var(--metricValue);
+}
+
+.redirectInfo span {
+	font-size: 13px;
+	color: var(--lightText);
+	font-style: italic;
+}
+
+/* Buttons */
+.buttonGroup {
+	display: flex;
+	gap: 12px;
+	margin-top: 32px;
+}
+
+.cancelButton,
+.backButton,
+.proceedButton,
+.deleteButton {
+	flex: 1;
+	padding: 14px 24px;
+	border-radius: var(--border-radii);
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.cancelButton,
+.backButton {
+	background: var(--subtleCardBackground);
+	color: var(--metricValue);
+	border: 2px solid var(--lightMetricValue);
+}
+
+.cancelButton:hover,
+.backButton:hover {
+	background: var(--metricValue);
+	color: white;
+	border: none;
+}
+
+.proceedButton {
+	background: var(--lightMetricValue);
+	color: var(--cardBackground);
+}
+
+.proceedButton:hover:not(:disabled) {
+	background:var(--metricValue);
+}
+
+.proceedButton:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.deleteButton {
+	background: linear-gradient(135deg, var(--highValue), var(--vHighValue));
+	color: white;
+	border: none;
+}
+
+.deleteButton:hover:not(:disabled) {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(186, 81, 72, 0.4);
+}
+
+.deleteButton:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.spinner {
+	width: 20px;
+	height: 20px;
+	border: 3px solid rgba(255, 255, 255, 0.3);
+	border-top-color: white;
+	border-radius: 50%;
+	animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.stepContainer {
+		padding: 24px 20px;
+	}
+
+	.title {
+		font-size: 24px;
+	}
+
+	.subtitle {
+		font-size: 14px;
+	}
+
+	.buttonGroup {
+		flex-direction: column;
+	}
+
+	.cancelButton,
+	.backButton,
+	.proceedButton,
+	.deleteButton {
+		width: 100%;
+	}
+
+	.summaryItem {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.summaryItem span,
+	.reasonsList {
+		text-align: left;
+	}
+}
+
+@media (max-width: 480px) {
+	.stepContainer {
+		padding: 20px 16px;
+	}
+
+	.title {
+		font-size: 20px;
+	}
+
+	.subtitle {
+		font-size: 13px;
+	}
+
+	.infoBox,
+	.summaryBox,
+	.finalWarningBox,
+	.successBox {
+		padding: 16px;
+	}
+
+	.reasonButton,
+	.gracePeriodCard {
+		padding: 14px;
+	}
+
+	.buttonGroup {
+		gap: 8px;
+		margin-top: 24px;
+	}
+
+	.cancelButton,
+	.backButton,
+	.proceedButton,
+	.deleteButton {
+		padding: 12px 20px;
+		font-size: 14px;
+	}
+}

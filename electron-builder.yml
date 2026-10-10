@@ -1,0 +1,88 @@
+appId: com.devamitch.olo.desktop
+productName: oLo
+copyright: Copyright © 2025 Aura Medical Technologies Inc.
+
+directories:
+  output: dist
+  buildResources: build
+
+files:
+  - "**/*"
+  - "!**/.vscode/*"
+  - "!src/*"
+  - "!electron.vite.config.{js,ts,mjs,cjs}"
+  - "!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}"
+  - "!{.env,.env.*,.npmrc,pnpm-lock.yaml}"
+  - "!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}"
+  - "!.codebuild/*"
+  - "!.github/*"
+
+buildDependenciesFromSource: false
+nodeGypRebuild: false
+npmRebuild: false
+
+# ✅ S3 PUBLISHING CONFIGURATION
+publish:
+  provider: s3
+  bucket: olo-nextron
+  region: ca-central-1
+  acl: public-read
+  path: /releases/${version}
+
+mac:
+  category: public.app-category.medical
+  target:
+    - dmg
+    # - zip
+  icon: renderer/public/logo.png
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: assets/entitlements.mac.plist
+  entitlementsInherit: assets/entitlements.mac.inherit.plist
+  extendInfo:
+    # Camera permission (REQUIRED for notarized apps)
+    NSCameraUsageDescription: "oLo needs access to your camera to monitor your eye health in real-time using AI-powered tracking."
+    # Microphone permission
+    NSMicrophoneUsageDescription: "oLo may need microphone access for future features."
+    # Deep linking for Apple Sign-In
+    CFBundleURLTypes:
+      - CFBundleURLName: "Apple OAuth Redirect"
+        CFBundleURLSchemes: 
+          - "com.devamitch.olodesktop"
+    LSApplicationQueriesSchemes:
+      - "https"
+      - "http"
+
+win:
+  icon: build/icons/icon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  allowElevation: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: "oLo"
+  uninstallDisplayName: "oLo - AI Eye Health Monitoring"
+  installerIcon: build/icons/icon.ico
+  uninstallerIcon: build/icons/icon.ico
+  installerHeader: build/icons/installerHeader.bmp
+  installerSidebar: build/icons/installerSidebar.bmp
+  include: assets/installer.nsh
+  runAfterFinish: true
+  perMachine: true
+extraFiles:
+  - from: build/olo_care.cer
+    to: olo_care.cer
+
+
+linux:
+  target: deb
+  icon: build/icons
+  category: Medical
+  maintainer: "Aura Medical Technologies Inc <amit98ch@gmail.com>"
+  synopsis: "AI-powered eye health monitoring application"

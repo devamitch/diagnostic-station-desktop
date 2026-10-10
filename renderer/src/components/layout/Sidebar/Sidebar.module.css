@@ -1,0 +1,266 @@
+.sidebar {
+	width: 230px;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	padding: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid rgba(15, 23, 42, 0.2);
+	background: var(--subtleCardBackground);
+	z-index: 10;
+}
+.logoImage {
+	width: 20px;
+	height: 20px;
+	margin-right: 1rem;
+	margin-top: 0.2rem;
+}
+.header {
+	text-align: center;
+	margin-bottom: 28px;
+	margin-top: 0.5rem;
+}
+
+.logo {
+	font-size: 26px;
+	font-weight: 700;
+	color: var(--metricValue);
+	margin-bottom: 0.5rem;
+	display: flex;
+	flex-direction: row;
+}
+
+.navigation {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin-top: 2rem;
+}
+
+.navItem {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.65rem 0.8rem;
+	color: var(--metricValue);
+	border-radius: 12px;
+	transition: all 0.3s ease;
+	font-size: 16px;
+	font-weight: 400;
+	pointer-events: auto;
+	cursor: pointer;
+}
+
+.navItem[data-active='true'] {
+	display: flex;
+	width: 100%;
+	padding: 11px 20px 11px 21px;
+	align-items: center;
+	gap: 8px;
+	border-radius: 20px;
+	background: var(--lightMetricValue);
+	color: var(--cardBackground);
+}
+
+.navItem[data-active='true'] .navText {
+	color: white;
+}
+
+.navText {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--metricValue);
+}
+
+/* Footer Container */
+.footer {
+	margin-top: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding-top: 12px;
+}
+
+/* Version Badge */
+.versionBadge {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1px;
+	padding: 3px;
+	background: var(--cardBackground);
+	border-radius: 10px;
+	height: fit-content;
+	width: fit-content;
+	align-self: center;
+	margin-left: 5px;
+	/* margin-bottom: 200px; */
+}
+
+
+.versionLabel {
+	font-size: 9px;
+	font-weight: 600;
+	color: var(--lightText);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	
+}
+
+.versionNumber {
+	font-size: 9px;
+	font-weight: 700;
+	color: var(--lowValue);
+	font-family: var(--default-mono-font-family), 'Monaco', 'Courier New', monospace;
+}
+
+@media (max-width: 1024px) and (min-width: 600px) {
+	.sidebar {
+		width: 70px;
+		padding: 0.5rem;
+	}
+
+	.header {
+		display: none;
+	}
+
+	.navigation {
+		margin-top: 1rem;
+	}
+
+	.navText {
+		display: none;
+	}
+
+	.navItem {
+		justify-content: center;
+		padding: 0.75rem 0.5rem;
+	}
+
+	.navItem[data-active='true'] {
+		padding: 11px 8px;
+		justify-content: center;
+	}
+
+	/* Tablet version badge - icon only */
+	.versionBadge {
+		flex-direction: column;
+		padding: 8px;
+		gap: 4px;
+	}
+
+	.versionLabel {
+		font-size: 9px;
+		writing-mode: horizontal-tb;
+	}
+
+	.versionNumber {
+		font-size: 11px;
+	}
+}
+
+
+
+@media (max-width: 600px) {
+	.mobileSidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 280px;
+		height: 100vh;
+		z-index: 1000;
+		background: var(--subtleCardBackground);
+		transform: translateX(-100%);
+		transition: transform 0.3s ease;
+		box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.mobileOpen {
+		transform: translateX(0);
+	}
+
+	.mobileHidden {
+		transform: translateX(-100%);
+	}
+	.backdrop {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(4px);
+		z-index: 101;
+	} 
+	.logo{
+		font-size: 22px;
+		dispay: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 8px;
+	}
+
+
+	.closeButton {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: var(--cardBackground);
+		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background-color 0.2s ease;
+	}
+
+	.languageSwitcherFooter {
+		padding: 12px 0;
+		border-top: 1px solid rgba(15, 23, 42, 0.1);
+		display: flex ;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.languageHeader {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px;
+		color: var(--metricValue);
+		font-size: 14px;
+		font-weight: 500;
+	}
+	.languageHeaderFlag {
+		font-size: 16px;
+	}
+	.languageLinks {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+	.languageLink {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 4px;
+		color: #3b82f6;
+		font-size: 12px;
+		cursor: pointer;
+		font-weight: 400;
+		width: fit-content;
+	}
+	.languageLinkFlag {
+		font-size: 14px;
+	}
+
+	/* Mobile version badge styling */
+	.versionBadge {
+		margin: 0 8px;
+	}
+}
